@@ -31,7 +31,7 @@ const (
 	//PROJECT_ID = "around-xxx"
 	//BT_INSTANCE = "around-post"
 	// Needs to update this URL if you deploy it to cloud.
-	ES_URL = "http://54.245.162.150:9200"
+	ES_URL = "http://54.245.220.43:9200"
 )
 
 func main() {
@@ -86,7 +86,7 @@ func handlerPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Fprintf(w, "Post received: %s\n", p.Message)
+	//fmt.Fprintf(w, "Post received: %s\n", p.Message)
 
 	// Create a client
 	es_client, err := elastic.NewClient(elastic.SetURL(ES_URL), elastic.SetSniff(false))
