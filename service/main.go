@@ -8,8 +8,8 @@ import (
 	"log"
 	"strconv"
 	"reflect"
-	"context"
-	"cloud.google.com/go/bigtable"
+	//"context"
+	//"cloud.google.com/go/bigtable"
 	"github.com/pborman/uuid"
 )
 
@@ -33,7 +33,7 @@ const (
 	PROJECT_ID = "meta-cistern-180122"
 	BT_INSTANCE = "around-post"
 	// Needs to update this URL if you deploy it to cloud.
-	ES_URL = "http://54.245.220.43:9200"
+	ES_URL = "http://54.200.33.75:9200"
 )
 
 func main() {
@@ -114,7 +114,7 @@ func handlerPost(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Printf("Post is saved to Index: %s\n", p.Message)
 
-
+	/*
 	ctx := context.Background()
 	// you must update project name here
 	bt_client, err := bigtable.NewClient(ctx, PROJECT_ID, BT_INSTANCE)
@@ -138,6 +138,7 @@ func handlerPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Printf("Post is saved to BigTable: %s\n", p.Message)
+	*/
 }
 
 func handlerSearch(w http.ResponseWriter, r *http.Request) {
@@ -189,9 +190,10 @@ func handlerSearch(w http.ResponseWriter, r *http.Request) {
 	for _, item := range searchResult.Each(reflect.TypeOf(typ)) {
 		p := item.(Post) // p = (Post) item
 		fmt.Printf("Post by %s: %s at lat %v and lon %v\n", p.User, p.Message, p.Location.Lat, p.Location.Lon)
-		// TODO(student homework): Perform filtering based on keywords such as web spam etc.
-		ps = append(ps, p)
-
+		// Perform filtering based on keywords such as web spam etc.
+		if strings.Contain(p.Message, "Ass") == false {
+			ps = append(ps, p)
+		}
 	}
 	js, err := json.Marshal(ps)
 	if err != nil {
