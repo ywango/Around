@@ -1,8 +1,4 @@
-This is the web service part of Nearby project, please see the IOS part for IOS development.
-See below for brief introduction of the whole project:
+This is the web service part of Nearby project:
+Developed a web service in Go for users to post and search events nearby without being affected by web spam(eg. Ads, etc.)
 
-Developed an iOS app for users to post and search events nearby without being affected by web spam(eg. Ads, etc.)
--  Built a web service in Go to handle posts and keyword based spam detection
--  Used ElasticSearch (GCE) to provide Geo-Index based search functions within a distance given by user(eg. 200km)
--  Deployed the service to Google Cloud (GAE flex) for better scaling and created Bigtable for persistent posts storage
--  Used Google Dataflow to implement a daily dump of posts to BigQuery table for offline analysis
+Please see the IOS part for IOS development.
